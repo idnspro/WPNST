@@ -1,10 +1,13 @@
 <?php
 /**
- * Template part for displaying page content in page.php.
+ * The template used for displaying page content
  *
- * @link https://codex.wordpress.org/Template_Hierarchy
+ *
+ * @link https://wptheme.idns-technologies.com/idnspro/
  *
  * @package idnspro
+ * @subpackage Wptheme_idnspro
+ * @since Wptheme idnspro 1.0
  */
 
 ?>

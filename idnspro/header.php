@@ -1,50 +1,61 @@
 <?php
 /**
- * The header for our theme.
+ * The template for displaying the header
  *
- * This is the template that displays all of the <head> section and everything up until <div id="content">
+ * Displays all of the head element and everything up until the "site-content" div.
  *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
+ * @link https://wptheme.idns-technologies.com/idnspro/
  *
  * @package idnspro
+ * @subpackage Wptheme_idnspro
+ * @since Wptheme idnspro 1.0
  */
 
 ?><!DOCTYPE html>
-<html <?php language_attributes(); ?>>
+<html <?php language_attributes(); ?> class="no-js">
 <head>
-<meta charset="<?php bloginfo( 'charset' ); ?>">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="profile" href="http://gmpg.org/xfn/11">
-<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
-
-<?php wp_head(); ?>
+	<meta charset="<?php bloginfo( 'charset' ); ?>">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<?php if ( is_singular() && pings_open( get_queried_object() ) ) : ?>
+	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
+	<?php endif; ?>
+	<?php wp_head(); ?>
 </head>
-
 <body <?php body_class(); ?>>
-<div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#main"><?php esc_html_e( 'Skip to content', 'idnspro' ); ?></a>
+<!-- Wrapper -->
+<div id="wrapper">
+	<!-- Header -->
+	<header id="header">
+		<div class="inner">
 
-	<header id="masthead" class="site-header" role="banner">
-		<div class="site-branding">
-			<?php
-			if ( is_front_page() && is_home() ) : ?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-			<?php else : ?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-			<?php
-			endif;
+			<!-- Logo -->
+			<?php idnspro_the_custom_logo(); ?>
 
-			$description = get_bloginfo( 'description', 'display' );
-			if ( $description || is_customize_preview() ) : ?>
-				<p class="site-description"><?php echo $description; /* WPCS: xss ok. */ ?></p>
-			<?php
-			endif; ?>
-		</div><!-- .site-branding -->
+			<?php if ( has_nav_menu( 'primary' ) ) : ?>
+			<!-- Nav -->
+			<nav>
+				<ul>
+					<li><a href="#menu">Menu</a></li>
+				</ul>
+			</nav>
+			<?php endif; ?>
 
-		<nav id="site-navigation" class="main-navigation" role="navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'idnspro' ); ?></button>
-			<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) ); ?>
-		</nav><!-- #site-navigation -->
-	</header><!-- #masthead -->
-
-	<div id="content" class="site-content">
+		</div>
+	</header>
+	<?php if ( has_nav_menu( 'primary' ) ) : ?>
+	<!-- Menu -->
+	<nav id="menu">
+		<h2>Menu</h2>
+		<?php
+			wp_nav_menu( array(
+				'theme_location' => 'primary',
+				'container'      => false,
+				'menu_class'     => 'menu',
+				'menu_id'        => 'accordion',
+				'before'         => '<span class="arrow-btn"></span>',
+				'fallback_cb'    => '',
+			 ) );
+		?>
+	</nav>
+	<?php endif; ?>
